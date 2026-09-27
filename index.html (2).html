@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar sesión en Cuentas de Google</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", reloj, sans-serif;
+            background-color: #f0f4f9;
+            -webkit-font-smoothing: antialiased;
+        }
+        /* Estilos hiperrealistas Material Design de Google para los inputs flotantes */
+        .g-input-container {
+            position: relative;
+        }
+        .g-input {
+            width: 100%;
+            height: 56px;
+            padding: 16px;
+            font-size: 16px;
+            color: #202124;
+            background: transparent;
+            border: 1px solid #747775;
+            border-radius: 4px;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .g-input:focus {
+            border: 2px solid #0b57d0;
+            padding: 15px; /* Compensar el borde de 2px */
+        }
+        .g-label {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffffff;
+            padding: 0 4px;
+            color: #747775;
+            font-size: 16px;
+            pointer-events: none;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .g-input:focus ~ .g-label,
+        .g-input:not(:placeholder-shown) ~ .g-label {
+            top: 0;
+            font-size: 12px;
+            color: #0b57d0;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between items-center p-4 sm:p-6">
+
+    <main class="w-full flex-grow flex items-center justify-center">
+        <!-- Tarjeta principal de Google con proporciones reales -->
+        <div id="card-container" class="bg-white w-full max-w-[1024px] rounded-[28px] shadow-[0_1px_3px_0_rgba(60,64,67,0.3),0_4px_8px_3px_rgba(60,64,67,0.15)] p-8 sm:py-14 sm:px-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            <!-- STEP 1: Vista de Correo -->
+            <div id="login-view" class="flex flex-col justify-center space-y-8 md:col-span-2">
+                <!-- Logotipo de Google -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.15v3.15C3.14 21.35 7.28 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.15C.42 8.08 0 9.73 0 12s.42 3.92 1.15 5.39l4.12-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.28 0 3.14 2.65 1.15 6.61l4.12 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                </div>
+
+                <!-- Columnas simétricas de Google -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start w-full">
+                    <div>
+                        <h1 class="text-[40px] font-normal text-[#1f1f1f] tracking-tight leading-[48px] mb-2">Inicia sesión</h1>
+                        <p class="text-[16px] font-normal text-[#1f1f1f] leading-[24px]">con tu cuenta de Google. Esta cuenta estará disponible para otras aplicaciones de Google en el navegador.</p>
+                    </div>
+
+                    <form id="google-form" class="space-y-6">
+                        <div class="g-input-container">
+                            <input type="email" id="email-input" required class="g-input" placeholder=" " />
+                            <label for="email-input" class="g-label">Correo electrónico o teléfono</label>
+                        </div>
+
+                        <div>
+                            <a href="#" class="text-[#0b57d0] font-medium text-[14px] hover:bg-[#f2f6fc] inline-block py-1 rounded">¿Has olvidado tu correo electrónico?</a>
+                        </div>
+
+                        <div class="text-[14px] text-[#444746] leading-[20px] pt-2">
+                            ¿No es tu ordenador? Usa el modo Invitado para iniciar sesión de forma privada. 
+                            <a href="#" class="text-[#0b57d0] font-medium hover:underline">Más información sobre cómo usar el modo Invitado</a>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-8">
+                            <button type="button" class="text-[#0b57d0] font-medium text-[14px] px-6 py-2.5 rounded-full hover:bg-[#f2f6fc] transition-colors">
+                                Crear cuenta
+                            </button>
+                            <button type="submit" class="bg-[#0b57d0] text-white font-medium text-[14px] px-6 py-2.5 rounded-full hover:bg-[#0842a0] hover:shadow-[0_1px_2px_0_rgba(60,64,67,0.3)] transition-all">
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- STEP 2: Vista de Contraseña Exacta a la Imagen -->
+            <div id="password-view" class="hidden flex-col justify-center space-y-8 md:col-span-2">
+                <!-- Logotipo de Google -->
+                <div class="flex items-center">
+                    <svg class="w-8 h-8" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"/>
+                        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.13 0-5.78-2.11-6.73-4.96H1.15v3.15C3.14 21.35 7.28 24 12 24z"/>
+                        <path fill="#FBBC05" d="M5.27 14.24c-.25-.72-.38-1.49-.38-2.24s.13-1.52.38-2.24V6.61H1.15C.42 8.08 0 9.73 0 12s.42 3.92 1.15 5.39l4.12-3.15z"/>
+                        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.28 0 3.14 2.65 1.15 6.61l4.12 3.15c.95-2.85 3.6-4.96 6.73-4.96z"/>
+                    </svg>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start w-full">
+                    <div>
+                        <h2 class="text-[40px] font-normal text-[#1f1f1f] tracking-tight leading-[48px] mb-4">Te damos la bienvenida</h2>
+                        <!-- Chip de email idéntico a la imagen provista -->
+                        <div id="password-back-btn" class="inline-flex items-center gap-2.5 border border-[#dadce0] rounded-full py-1.5 px-3.5 hover:bg-[#f8f9fa] cursor-pointer transition-colors mt-1 max-w-full">
+                            <svg class="w-5 h-5 text-[#5f6368] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+                            </svg>
+                            <span id="display-email" class="text-[14px] font-medium text-[#3c4043] truncate"></span>
+                            <svg class="w-4 h-4 text-[#5f6368] shrink-0" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+                        </div>
+                    </div>
+
+                    <form id="password-form" class="space-y-6">
+                        <div class="g-input-container">
+                            <input type="password" id="password-input" required autocomplete="off" class="g-input" placeholder=" " />
+                            <label for="password-input" class="g-label">Introduce tu contraseña</label>
+                            
+                            <!-- Checkbox mostrar contraseña idéntico -->
+                            <div class="flex items-center gap-3 mt-3">
+                                <input type="checkbox" id="show-password-checkbox" class="w-4 h-4 text-[#0b57d0] border-[#747775] rounded focus:ring-[#0b57d0] cursor-pointer">
+                                <label for="show-password-checkbox" class="text-[14px] text-[#1f1f1f] cursor-pointer select-none">Mostrar contraseña</label>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-8">
+                            <a href="#" class="text-[#0b57d0] font-medium text-[14px] hover:bg-[#f2f6fc] px-3 py-2 rounded transition-colors">
+                                Probar otra manera
+                            </a>
+                            <button type="submit" class="bg-[#0b57d0] text-white font-medium text-[14px] px-6 py-2.5 rounded-full hover:bg-[#0842a0] hover:shadow-[0_1px_2px_0_rgba(60,64,67,0.3)] transition-all">
+                                Siguiente
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- STEP 3: Vista de Error de Conexión -->
+            <div id="error-view" class="hidden flex-col justify-center space-y-6 md:col-span-2">
+                <div>
+                    <h2 class="text-2xl font-normal text-[#1f1f1f] mb-2">Sin conexión a Internet</h2>
+                    <p class="text-sm text-[#5f6368]">El servidor de Google Classroom no puede verificar tus credenciales en este momento.</p>
+                </div>
+
+                <div class="bg-[#f8f9fa] border border-[#dadce0] rounded-lg p-5 text-sm text-[#3c4043] space-y-2">
+                    <p class="font-medium text-[#202124]">Diagnóstico de red:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-[#5f6368]">
+                        <li>Comprueba si hay errores en el cable, el módem y el router.</li>
+                        <li>Vuelve a conectarte a una red Wi-Fi válida.</li>
+                        <li>El acceso local a la API de autenticación fue interrumpido por seguridad.</li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4">
+                    <button id="back-btn" class="text-[#0b57d0] font-medium text-sm hover:underline">
+                        ← Volver a intentar
+                    </button>
+                    <a href="https://classroom.google.com" target="_blank" rel="noopener noreferrer"
+                        class="w-full sm:w-auto text-center bg-[#0b57d0] text-white font-medium text-sm px-8 py-2.5 rounded-full hover:bg-[#0842a0] hover:shadow transition-all">
+                        Reintentar
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Auténtico de Google -->
+    <footer class="w-full max-w-[1024px] flex flex-col sm:flex-row items-center justify-between text-[12px] text-[#5f6368] py-4 px-2 gap-4">
+        <div class="relative">
+            <select aria-label="Español (España)" class="bg-transparent text-[#444746] py-1 px-2 rounded hover:bg-black/5 cursor-pointer outline-none">
+                <option>Español (España)</option>
+                <option>English (United States)</option>
+                <option>Français</option>
+                <option>Português (Brasil)</option>
+            </select>
+        </div>
+
+        <div class="flex items-center space-x-6">
+            <a href="https://support.google.com" target="_blank" class="hover:text-[#202124]">Ayuda</a>
+            <a href="https://policies.google.com/privacy" target="_blank" class="hover:text-[#202124]">Privacidad</a>
+            <a href="https://policies.google.com/terms" target="_blank" class="hover:text-[#202124]">Términos</a>
+        </div>
+    </footer>
+
+    <!-- Lógica de Navegación y Credenciales -->
+    <script>
+        const googleForm = document.getElementById('google-form');
+        const loginView = document.getElementById('login-view');
+        const passwordView = document.getElementById('password-view');
+        const errorView = document.getElementById('error-view');
+
+        const backBtn = document.getElementById('back-btn');
+        const passwordBackBtn = document.getElementById('password-back-btn');
+
+        const emailInput = document.getElementById('email-input');
+        const passwordInput = document.getElementById('password-input');
+        const displayEmail = document.getElementById('display-email');
+        const passwordForm = document.getElementById('password-form');
+        const showPasswordCheckbox = document.getElementById('show-password-checkbox');
+
+        let currentEmail = '';
+
+        googleForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            currentEmail = emailInput.value.trim();
+            if (!currentEmail) return;
+
+            displayEmail.textContent = currentEmail;
+
+            loginView.classList.add('hidden');
+            loginView.classList.remove('flex');
+
+            passwordView.classList.remove('hidden');
+            passwordView.classList.add('flex');
+
+            passwordInput.value = '';
+            showPasswordCheckbox.checked = false;
+            passwordInput.type = 'password';
+            passwordInput.focus();
+        });
+
+        showPasswordCheckbox.addEventListener('change', function() {
+            passwordInput.type = this.checked ? 'text' : 'password';
+        });
+
+        passwordForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const password = passwordInput.value;
+            if (!password) return;
+
+            // Credenciales personalizadas solicitadas
+            if (currentEmail === 'funny@gmail.com' && password === 'funny') {
+                window.location.href = 'https://usernotfound211.github.io/peakb/';
+                return;
+            }
+
+            // Redirección general a Classroom
+            window.location.href = 'https://classroom.google.com';
+        });
+
+        passwordBackBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            passwordView.classList.add('hidden');
+            passwordView.classList.remove('flex');
+
+            loginView.classList.remove('hidden');
+            loginView.classList.add('flex');
+
+            passwordInput.value = '';
+            emailInput.focus();
+        });
+
+        backBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            errorView.classList.add('hidden');
+            errorView.classList.remove('flex');
+
+            loginView.classList.remove('hidden');
+            loginView.classList.add('flex');
+
+            emailInput.value = '';
+            passwordInput.value = '';
+            emailInput.focus();
+        });
+    </script>
+</body>
+</html>
